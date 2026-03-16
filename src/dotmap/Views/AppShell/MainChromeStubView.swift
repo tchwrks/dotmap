@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct MainChromeStubView: View {
+    private var leadingTopAccessoryWidth: CGFloat = 0
+
     var body: some View {
         VStack(spacing: 0) {
             topChrome
@@ -17,6 +19,9 @@ struct MainChromeStubView: View {
 
     private var topChrome: some View {
         HStack(spacing: DotmapSpacing.sm) {
+            Color.clear
+                .frame(width: leadingTopAccessoryWidth, height: 1)
+
             Text("Home")
                 .dotmapTextStyle(DotmapTypography.bodyStrong)
                 .foregroundStyle(DotmapColor.textInverse)
@@ -54,9 +59,9 @@ struct MainChromeStubView: View {
                     .stroke(DotmapColor.borderField, lineWidth: 1)
             )
         }
-        .padding(.horizontal, DotmapSpacing.lg)
+        .padding(.horizontal, AppShellChromeMetrics.topChromeHorizontalPadding)
         .padding(.vertical, DotmapSpacing.sm)
-        .frame(height: 36)
+        .frame(height: AppShellChromeMetrics.topChromeHeight)
         .background(DotmapColor.appBackground)
         .overlay(alignment: .bottom) {
             Rectangle()
@@ -95,5 +100,13 @@ struct MainChromeStubView: View {
                 )
                 .frame(height: 124)
         }
+    }
+}
+
+extension MainChromeStubView {
+    func leadingTopAccessoryWidth(_ width: CGFloat) -> MainChromeStubView {
+        var copy = self
+        copy.leadingTopAccessoryWidth = width
+        return copy
     }
 }

@@ -3,9 +3,17 @@ import SwiftUI
 
 struct DotmapWindowConfigurator: NSViewRepresentable {
     let minimumSize: CGSize
+    let controlsLeftInset: CGFloat
+    let controlsSpacing: CGFloat
+    let controlsTopInset: CGFloat
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(minimumSize: minimumSize)
+        Coordinator(
+            minimumSize: minimumSize,
+            controlsLeftInset: controlsLeftInset,
+            controlsSpacing: controlsSpacing,
+            controlsTopInset: controlsTopInset
+        )
     }
 
     func makeNSView(context: Context) -> NSView {
@@ -20,6 +28,9 @@ struct DotmapWindowConfigurator: NSViewRepresentable {
 
     func updateNSView(_ nsView: NSView, context: Context) {
         context.coordinator.minimumSize = minimumSize
+        context.coordinator.controlsLeftInset = controlsLeftInset
+        context.coordinator.controlsSpacing = controlsSpacing
+        context.coordinator.controlsTopInset = controlsTopInset
 
         DispatchQueue.main.async {
             context.coordinator.configureIfNeeded(for: nsView.window)
@@ -28,13 +39,24 @@ struct DotmapWindowConfigurator: NSViewRepresentable {
 
     final class Coordinator {
         var minimumSize: CGSize
+        var controlsLeftInset: CGFloat
+        var controlsSpacing: CGFloat
+        var controlsTopInset: CGFloat
 
         private weak var observedWindow: NSWindow?
         private var didConfigure = false
         private var resizeObserver: NSObjectProtocol?
 
-        init(minimumSize: CGSize) {
+        init(
+            minimumSize: CGSize,
+            controlsLeftInset: CGFloat,
+            controlsSpacing: CGFloat,
+            controlsTopInset: CGFloat
+        ) {
             self.minimumSize = minimumSize
+            self.controlsLeftInset = controlsLeftInset
+            self.controlsSpacing = controlsSpacing
+            self.controlsTopInset = controlsTopInset
         }
 
         deinit {
@@ -96,14 +118,11 @@ struct DotmapWindowConfigurator: NSViewRepresentable {
                 return
             }
 
-            let leftInset: CGFloat = 16
-            let spacing: CGFloat = 7
-            let topInset: CGFloat = 11
-            let y = buttonContainer.bounds.height - closeButton.frame.height - topInset
+            let y = buttonContainer.bounds.height - closeButton.frame.height - controlsTopInset
 
-            closeButton.setFrameOrigin(NSPoint(x: leftInset, y: y))
-            minimizeButton.setFrameOrigin(NSPoint(x: closeButton.frame.maxX + spacing, y: y))
-            zoomButton.setFrameOrigin(NSPoint(x: minimizeButton.frame.maxX + spacing, y: y))
+            closeButton.setFrameOrigin(NSPoint(x: controlsLeftInset, y: y))
+            minimizeButton.setFrameOrigin(NSPoint(x: closeButton.frame.maxX + controlsSpacing, y: y))
+            zoomButton.setFrameOrigin(NSPoint(x: minimizeButton.frame.maxX + controlsSpacing, y: y))
         }
     }
 }

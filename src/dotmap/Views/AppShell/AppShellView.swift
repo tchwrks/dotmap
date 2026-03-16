@@ -3,8 +3,8 @@ import SwiftUI
 struct AppShellView: View {
     @AppStorage("dotmap.chrome.sidebar.open") private var isSidebarOpen = true
 
-    private let sidebarWidth: CGFloat = 150
-    private let contentInset: CGFloat = 8
+    private let sidebarWidth = AppShellChromeMetrics.sidebarWidth
+    private let contentInset = AppShellChromeMetrics.contentInset
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -14,7 +14,7 @@ struct AppShellView: View {
             DotmapColor.windowChrome
                 .ignoresSafeArea()
 
-            HStack(alignment: .top, spacing: isSidebarOpen ? contentInset : 0) {
+            HStack(alignment: .top, spacing: isSidebarOpen ? AppShellChromeMetrics.interPaneSpacing : 0) {
                 if isSidebarOpen {
                     SidebarChromeStubView()
                         .frame(width: sidebarWidth, alignment: .topLeading)
@@ -23,6 +23,7 @@ struct AppShellView: View {
                 }
 
                 MainChromeStubView()
+                    .leadingTopAccessoryWidth(isSidebarOpen ? 0 : AppShellChromeMetrics.closedTopChromeLeadingAccessoryWidth)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
             .padding(contentInset)
@@ -36,7 +37,10 @@ struct AppShellView: View {
         }
         .background(
             DotmapWindowConfigurator(
-                minimumSize: CGSize(width: 824, height: 646)
+                minimumSize: CGSize(width: 824, height: 646),
+                controlsLeftInset: AppShellChromeMetrics.trafficLightsLeftInset,
+                controlsSpacing: AppShellChromeMetrics.trafficLightsSpacing,
+                controlsTopInset: AppShellChromeMetrics.trafficLightsTopInset
             )
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

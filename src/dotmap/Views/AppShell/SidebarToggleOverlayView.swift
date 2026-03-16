@@ -6,18 +6,20 @@ struct SidebarToggleOverlayView: View {
     let sidebarWidth: CGFloat
     let inset: CGFloat
 
-    private let buttonSize: CGFloat = 18
-    private let topOffset: CGFloat = 8
-    private let closedX: CGFloat = 90
+    private let animation = Animation.spring(response: 0.22, dampingFraction: 0.86, blendDuration: 0.12)
 
     var body: some View {
         Button {
-            withAnimation(.spring(response: 0.22, dampingFraction: 0.86, blendDuration: 0.12)) {
+            withAnimation(animation) {
                 isSidebarOpen.toggle()
             }
         } label: {
-            DotmapIconView(icon: .panelToggle, size: DotmapSpacing.s14, tint: DotmapColor.textTertiary)
-                .frame(width: buttonSize, height: buttonSize)
+            DotmapIconView(
+                icon: isSidebarOpen ? .panelLeftClose : .panelLeftOpen,
+                size: DotmapSpacing.s14,
+                tint: DotmapColor.textTertiary
+            )
+                .frame(width: AppShellChromeMetrics.toggleSize, height: AppShellChromeMetrics.toggleSize)
                 .background(
                     RoundedRectangle(cornerRadius: DotmapRadius.sm, style: .continuous)
                         .fill(DotmapColor.surfaceSecondary.opacity(0.75))
@@ -29,12 +31,15 @@ struct SidebarToggleOverlayView: View {
         }
         .buttonStyle(.plain)
         .contentShape(Rectangle())
-        .offset(x: toggleX, y: topOffset)
+        .offset(x: toggleX, y: AppShellChromeMetrics.toggleTopOffset)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 
     private var toggleX: CGFloat {
-        let openX = inset + sidebarWidth - buttonSize
-        return isSidebarOpen ? openX : closedX
+        if isSidebarOpen {
+            return inset + sidebarWidth - AppShellChromeMetrics.toggleSize - AppShellChromeMetrics.openToggleTrailingInsetFromSidebar
+        }
+
+        return AppShellChromeMetrics.toggleClosedX
     }
 }

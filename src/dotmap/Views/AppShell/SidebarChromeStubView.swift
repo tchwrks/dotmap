@@ -4,7 +4,7 @@ struct SidebarChromeStubView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: DotmapSpacing.xl) {
             Color.clear
-                .frame(height: DotmapSpacing.s26)
+                .frame(height: AppShellChromeMetrics.topChromeHeight)
 
             VStack(alignment: .leading, spacing: DotmapSpacing.sm) {
                 Text("Dotmap")
