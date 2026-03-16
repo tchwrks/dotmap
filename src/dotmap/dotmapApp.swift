@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct dotmapApp: App {
+    init() {
+        DotmapFonts.registerBundledFonts()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()

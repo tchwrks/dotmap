@@ -1,5 +1,5 @@
 # Dotmap — Product Requirements Document
-**Version:** 0.3  
+**Version:** 0.2  
 **Last updated:** March 2026
 
 ---
