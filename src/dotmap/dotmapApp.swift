@@ -17,5 +17,6 @@ struct dotmapApp: App {
         WindowGroup {
             ContentView()
         }
+        .windowStyle(.hiddenTitleBar)
     }
 }
