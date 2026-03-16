@@ -135,8 +135,20 @@ enum ConfigEntry {
 ### Block view vs editor view
 - Both views are accessed via a segmented toggle in the topbar (`Blocks` / `Editor`).
 - The toggle only appears on config file pages — not on home, health checks, or environment views.
-- **In MVP, block view is read-only** — expand/collapse only, no inline editing, no drag-to-reorder.
-- Write-back and drag-to-reorder come in v0.2.
+- **Both views are editable in MVP.** User-written content can be edited, drag-to-reorder works in block view, and write-back with diff preview is included from day one.
+- Tool-managed blocks are always read-only in both views — identified by comment markers, locked, never editable.
+
+### Block view editing behavior
+- User blocks: click into expanded code area to edit inline. Per-block `Undo` and `Save` buttons appear in the block header only when the block has unsaved changes.
+- Drag handle (`⠿`) appears on hover for user blocks — drag to reorder. Tool blocks have no handle and cannot be dragged.
+- `+ Add block` insert zones appear between blocks on hover.
+- Save triggers diff preview modal before writing to file.
+
+### Editor view editing behavior
+- All user-written lines are contentEditable. Tool sections are not editable.
+- Dirty state: amber dot + "Unsaved changes" + `Undo` + `Save` appear in the topbar when any edit has been made.
+- Save triggers diff preview modal before writing to file.
+- Undo discards all unsaved changes to the file.
 
 ### Tool-managed blocks
 - Identified by known comment marker patterns (`# >>> nvm initialize >>>`, etc.)

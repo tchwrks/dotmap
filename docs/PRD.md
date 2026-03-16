@@ -1,5 +1,5 @@
 # Dotmap — Product Requirements Document
-**Version:** 0.2  
+**Version:** 0.3  
 **Last updated:** March 2026
 
 ---
@@ -197,15 +197,19 @@ These are non-negotiable.
 
 ## MVP Feature Set
 
-The MVP is **read-only**. No write-back, no inline editing, no drag-to-reorder. The block view in MVP is inspect-only — expand/collapse but no editing.
+The MVP includes both inspection **and editing** of user-written config content. The block view and editor view are both editable from day one. Tool-managed blocks are always read-only regardless of view.
 
 **Included in MVP:**
 
 *Home Dashboard* — health summary, recently changed, environment stats, config load order (all states: empty and populated)
 
-*Environment Inspector (read-only)* — Aliases, Variables (with masking), PATHs (with health indicators), Functions — all with overlay detail panels and filter chips
+*Environment Inspector (read-only)* — Aliases, Variables (with masking), PATHs (with health indicators), Functions — all with overlay detail panels and filter chips. Environment views are inspect-only in MVP — editing is done via the Config File View.
 
-*Config File View* — Block View (expand/collapse, syntax highlighting, read-only) and Editor View (syntax highlighting, tool section labels, line numbers)
+*Config File View — Block View* — expand/collapse, syntax highlighting, inline editing of user-written blocks, drag-to-reorder user blocks, per-block Save + Undo appearing only when a block has been modified, `+ Add block` insert zones between blocks. Tool-managed blocks (nvm, Homebrew, oh-my-zsh, rbenv etc.) are locked and read-only with a lock icon. Diff preview before any write.
+
+*Config File View — Editor View* — full syntax-highlighted editable view of the config file, line numbers, tool section labels with colored left borders, file-level dirty state with Undo + Save in topbar, diff preview modal before write. Tool sections are read-only.
+
+*Non-Destructive Write-Back (both views)* — diff preview before every save, backup created before write, formatting and comments preserved, tool-managed blocks never touched.
 
 *Health Checks* — dead PATHs, duplicates, shadowed aliases, dead sources, performance notices
 
@@ -214,7 +218,6 @@ The MVP is **read-only**. No write-back, no inline editing, no drag-to-reorder. 
 *Settings* — update check toggle, default view preference (Blocks or Editor)
 
 **Non-goals for MVP:**
-- Write-back, inline editing, drag-to-reorder in block view
 - Live vs static environment diff
 - Automation builder
 - Per-project profiles
@@ -227,8 +230,8 @@ The MVP is **read-only**. No write-back, no inline editing, no drag-to-reorder. 
 
 ## Post-MVP Roadmap
 
-**v0.2 — Write-back & Block Editor**
-Inline editing, drag-to-reorder, diff preview, backup on write, `+ Add block`.
+**v0.2 — Environment View Editing**
+Add/edit/delete aliases, variables, PATH entries directly from the environment views without going into the config file view. Same diff preview and write-back safety model.
 
 **v0.3 — Live Environment View**
 Spawn clean shell subprocess, diff static vs live.
