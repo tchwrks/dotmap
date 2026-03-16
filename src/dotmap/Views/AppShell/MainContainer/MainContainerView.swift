@@ -14,8 +14,8 @@ struct MainContainerView: View {
                 stubBlock(title: "Main Content Stub")
                 stubBlock(title: "Detail Surfaces Stub")
             }
-            .frame(maxWidth: 760, alignment: .topLeading)
-            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .frame(maxWidth: 800, alignment: .topLeading)
+            .frame(maxWidth: .infinity, alignment: .top)
             .padding(DotmapSpacing.lg)
             .padding(.top, DotmapSpacing.sm)
         }
