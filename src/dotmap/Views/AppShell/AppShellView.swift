@@ -37,7 +37,6 @@ struct AppShellView: View {
         }
         .background(
             DotmapWindowConfigurator(
-                minimumSize: CGSize(width: 824, height: 646),
                 controlsLeftInset: AppShellChromeMetrics.trafficLightsLeftInset,
                 controlsSpacing: AppShellChromeMetrics.trafficLightsSpacing,
                 controlsTopInset: AppShellChromeMetrics.trafficLightsTopInset

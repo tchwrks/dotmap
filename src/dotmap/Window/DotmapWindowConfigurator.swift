@@ -2,10 +2,24 @@ import AppKit
 import SwiftUI
 
 struct DotmapWindowConfigurator: NSViewRepresentable {
+    static let defaultMinimumSize = CGSize(width: 824, height: 646)
+
     let minimumSize: CGSize
     let controlsLeftInset: CGFloat
     let controlsSpacing: CGFloat
     let controlsTopInset: CGFloat
+
+    init(
+        minimumSize: CGSize = Self.defaultMinimumSize,
+        controlsLeftInset: CGFloat,
+        controlsSpacing: CGFloat,
+        controlsTopInset: CGFloat
+    ) {
+        self.minimumSize = minimumSize
+        self.controlsLeftInset = controlsLeftInset
+        self.controlsSpacing = controlsSpacing
+        self.controlsTopInset = controlsTopInset
+    }
 
     func makeCoordinator() -> Coordinator {
         Coordinator(
@@ -17,12 +31,10 @@ struct DotmapWindowConfigurator: NSViewRepresentable {
     }
 
     func makeNSView(context: Context) -> NSView {
-        let view = NSView(frame: .zero)
-
-        DispatchQueue.main.async {
-            context.coordinator.configureIfNeeded(for: view.window)
+        let view = WindowObserverView(frame: .zero)
+        view.onWindowChange = { [weak coordinator = context.coordinator] window in
+            coordinator?.configureIfNeeded(for: window)
         }
-
         return view
     }
 
@@ -32,8 +44,21 @@ struct DotmapWindowConfigurator: NSViewRepresentable {
         context.coordinator.controlsSpacing = controlsSpacing
         context.coordinator.controlsTopInset = controlsTopInset
 
-        DispatchQueue.main.async {
-            context.coordinator.configureIfNeeded(for: nsView.window)
+        if let observerView = nsView as? WindowObserverView {
+            observerView.onWindowChange = { [weak coordinator = context.coordinator] window in
+                coordinator?.configureIfNeeded(for: window)
+            }
+        }
+
+        context.coordinator.configureIfNeeded(for: nsView.window)
+    }
+
+    final class WindowObserverView: NSView {
+        var onWindowChange: ((NSWindow?) -> Void)?
+
+        override func viewDidMoveToWindow() {
+            super.viewDidMoveToWindow()
+            onWindowChange?(window)
         }
     }
 
@@ -105,7 +130,18 @@ struct DotmapWindowConfigurator: NSViewRepresentable {
                 window.titlebarSeparatorStyle = .none
             }
 
-            window.minSize = NSSize(width: minimumSize.width, height: minimumSize.height)
+            let minFrameSize = NSSize(width: minimumSize.width, height: minimumSize.height)
+            window.minSize = minFrameSize
+            window.contentMinSize = minFrameSize
+
+            // If macOS restores a smaller previous frame, bump it up immediately.
+            var frame = window.frame
+            let targetWidth = max(frame.width, minFrameSize.width)
+            let targetHeight = max(frame.height, minFrameSize.height)
+            if targetWidth != frame.width || targetHeight != frame.height {
+                frame.size = NSSize(width: targetWidth, height: targetHeight)
+                window.setFrame(frame, display: true)
+            }
         }
 
         private func positionWindowButtons(in window: NSWindow) {
