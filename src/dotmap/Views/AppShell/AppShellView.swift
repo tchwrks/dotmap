@@ -16,13 +16,13 @@ struct AppShellView: View {
 
             HStack(alignment: .top, spacing: isSidebarOpen ? AppShellChromeMetrics.interPaneSpacing : 0) {
                 if isSidebarOpen {
-                    SidebarChromeStubView()
+                    SidebarMenuView()
                         .frame(width: sidebarWidth, alignment: .topLeading)
                         .frame(maxHeight: .infinity, alignment: .topLeading)
                         .transition(.move(edge: .leading).combined(with: .opacity))
                 }
 
-                MainChromeStubView()
+                MainChromeView()
                     .leadingTopAccessoryWidth(isSidebarOpen ? 0 : AppShellChromeMetrics.closedTopChromeLeadingAccessoryWidth)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }

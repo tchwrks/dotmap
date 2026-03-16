@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct MainChromeStubView: View {
+// TODO: Replace mocked content blocks with production data-backed content.
+struct MainChromeView: View {
     private var leadingTopAccessoryWidth: CGFloat = 0
 
     var body: some View {
@@ -28,11 +29,17 @@ struct MainChromeStubView: View {
 
             Spacer(minLength: 0)
 
-            HStack(spacing: DotmapSpacing.xs) {
-                DotmapIconView(icon: .search, size: DotmapSpacing.s14, tint: DotmapColor.textMuted)
-                Text("Search")
-                    .dotmapTextStyle(DotmapTypography.caption)
-                    .foregroundStyle(DotmapColor.textMuted)
+            HStack(spacing: DotmapSpacing.xl) {
+                HStack(spacing: DotmapSpacing.xs) {
+                    DotmapIconView(
+                        icon: .search,
+                        size: DotmapSpacing.s14,
+                        tint: DotmapColor.textMuted
+                    )
+                    Text("Search")
+                        .dotmapTextStyle(DotmapTypography.caption)
+                        .foregroundStyle(DotmapColor.textMuted)
+                }
 
                 HStack(spacing: DotmapSpacing.xxs) {
                     DotmapIconView(icon: .command, size: 12, tint: DotmapColor.textMuted)
@@ -103,8 +110,8 @@ struct MainChromeStubView: View {
     }
 }
 
-extension MainChromeStubView {
-    func leadingTopAccessoryWidth(_ width: CGFloat) -> MainChromeStubView {
+extension MainChromeView {
+    func leadingTopAccessoryWidth(_ width: CGFloat) -> MainChromeView {
         var copy = self
         copy.leadingTopAccessoryWidth = width
         return copy

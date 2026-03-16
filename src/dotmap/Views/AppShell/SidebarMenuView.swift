@@ -1,12 +1,13 @@
 import SwiftUI
 
-struct SidebarChromeStubView: View {
+// TODO: Replace mocked sidebar rows with production navigation/content.
+struct SidebarMenuView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: DotmapSpacing.xl) {
             Color.clear
                 .frame(height: AppShellChromeMetrics.topChromeHeight)
 
-            VStack(alignment: .leading, spacing: DotmapSpacing.sm) {
+            VStack(alignment: .leading, spacing: DotmapSpacing.lg) {
                 Text("Dotmap")
                     .dotmapTextStyle(DotmapTypography.title)
                     .foregroundStyle(DotmapColor.textSubdued)
@@ -17,12 +18,12 @@ struct SidebarChromeStubView: View {
                 }
             }
 
-            VStack(alignment: .leading, spacing: DotmapSpacing.sm) {
-                sectionLabel("Environment")
+            VStack(alignment: .leading, spacing: DotmapSpacing.md) {
+                sectionLabel("Environment").textCase(.uppercase)
                 VStack(alignment: .leading, spacing: DotmapSpacing.xs) {
                     sidebarItem(icon: .aliases, title: "Aliases", isActive: false)
                     sidebarItem(icon: .variables, title: "Variables", isActive: false)
-                    sidebarItem(icon: .paths, title: "PATHS", isActive: false)
+                    sidebarItem(icon: .paths, title: "PATHs", isActive: false)
                     sidebarItem(icon: .functions, title: "Functions", isActive: false)
                 }
             }
