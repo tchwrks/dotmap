@@ -24,11 +24,11 @@ struct ContentView: View {
                 .ignoresSafeArea()
 
             VStack(alignment: .leading, spacing: DotmapSpacing.lg) {
-                Text("Dotmap Design System")
+                Text("Dotmap")
                     .dotmapTextStyle(DotmapTypography.title)
                     .foregroundStyle(DotmapColor.textPrimary)
 
-                Text("Core tokens, icon registry, and font loading are configured from Figma.")
+                Text("The visual shell config manager that macOS never shipped with")
                     .dotmapTextStyle(DotmapTypography.body)
                     .foregroundStyle(DotmapColor.textMuted)
 

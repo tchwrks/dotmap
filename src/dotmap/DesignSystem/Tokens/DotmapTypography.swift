@@ -37,28 +37,30 @@ private enum DotmapTracking {
 }
 
 enum DotmapTypography {
+    // Comfortable macOS density pass (+1pt from initial Figma-derived baseline).
+
     // 10px styles
     static let labelUppercase = DotmapTextStyle(
         family: .geistSans,
         weight: .medium,
-        size: 10,
-        lineHeight: 12,
-        letterSpacing: DotmapTracking.geist(for: 10)
+        size: 11,
+        lineHeight: 13,
+        letterSpacing: DotmapTracking.geist(for: 11)
     )
 
     static let caption = DotmapTextStyle(
         family: .geistSans,
         weight: .medium,
-        size: 10,
-        lineHeight: 12,
-        letterSpacing: DotmapTracking.geist(for: 10)
+        size: 11,
+        lineHeight: 13,
+        letterSpacing: DotmapTracking.geist(for: 11)
     )
 
     static let monoCaption = DotmapTextStyle(
         family: .geistMono,
         weight: .semibold,
-        size: 10,
-        lineHeight: 12,
+        size: 11,
+        lineHeight: 13,
         letterSpacing: DotmapTracking.mono
     )
 
@@ -66,30 +68,21 @@ enum DotmapTypography {
     static let statusTitle = DotmapTextStyle(
         family: .geistSans,
         weight: .semibold,
-        size: 11,
-        lineHeight: 14,
-        letterSpacing: DotmapTracking.geist(for: 11)
+        size: 12,
+        lineHeight: 15,
+        letterSpacing: DotmapTracking.geist(for: 12)
     )
 
     // 12px styles
     static let body = DotmapTextStyle(
         family: .geistSans,
         weight: .medium,
-        size: 12,
-        lineHeight: 15,
-        letterSpacing: DotmapTracking.geist(for: 12)
+        size: 13,
+        lineHeight: 16,
+        letterSpacing: DotmapTracking.geist(for: 13)
     )
 
     static let bodyStrong = DotmapTextStyle(
-        family: .geistSans,
-        weight: .semibold,
-        size: 12,
-        lineHeight: 15,
-        letterSpacing: DotmapTracking.geist(for: 12)
-    )
-
-    // 13px styles
-    static let title = DotmapTextStyle(
         family: .geistSans,
         weight: .semibold,
         size: 13,
@@ -97,20 +90,29 @@ enum DotmapTypography {
         letterSpacing: DotmapTracking.geist(for: 13)
     )
 
+    // 13px styles
+    static let title = DotmapTextStyle(
+        family: .geistSans,
+        weight: .semibold,
+        size: 14,
+        lineHeight: 17,
+        letterSpacing: DotmapTracking.geist(for: 14)
+    )
+
     // Numeric accents
     static let metric = DotmapTextStyle(
         family: .geistMono,
         weight: .semibold,
-        size: 15,
-        lineHeight: 20,
+        size: 16,
+        lineHeight: 21,
         letterSpacing: DotmapTracking.mono
     )
 
     static let detailHeading = DotmapTextStyle(
         family: .geistMono,
         weight: .semibold,
-        size: 20,
-        lineHeight: 26,
+        size: 21,
+        lineHeight: 27,
         letterSpacing: DotmapTracking.mono
     )
 
@@ -118,16 +120,16 @@ enum DotmapTypography {
     static let codeEditor = DotmapTextStyle(
         family: .geistMono,
         weight: .medium,
-        size: 13,
-        lineHeight: 18,
+        size: 14,
+        lineHeight: 19,
         letterSpacing: DotmapTracking.mono
     )
 
     static let codeEditorComment = DotmapTextStyle(
         family: .geistMono,
         weight: .medium,
-        size: 13,
-        lineHeight: 18,
+        size: 14,
+        lineHeight: 19,
         letterSpacing: DotmapTracking.mono,
         isItalic: true
     )
