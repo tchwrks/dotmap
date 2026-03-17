@@ -18,6 +18,7 @@ enum DotmapColor {
     static let borderStrong = Color(nsColor: .dotmapHex(0x444444))
     static let borderField = Color(nsColor: .dotmapHex(0x2B2A2A))
     static let borderFocus = Color(nsColor: .dotmapHex(0x504D4D))
+    static let keyboardFocusRing = Color.accentColor
 
     // Text
     static let textPrimary = Color(nsColor: .dotmapHex(0xD0D0D0))

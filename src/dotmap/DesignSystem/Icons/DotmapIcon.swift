@@ -15,6 +15,7 @@ enum DotmapIcon: String, CaseIterable {
     case paths
     case functions
     case configFile
+    case configCaret
     case settings
 
     case sectionHealthSummary
@@ -50,6 +51,7 @@ enum DotmapIcon: String, CaseIterable {
         case .paths: "link"
         case .functions: "curlybraces"
         case .configFile: "doc"
+        case .configCaret: "chevron.up"
         case .settings: "gearshape"
 
         case .sectionHealthSummary: "heart.text.square"

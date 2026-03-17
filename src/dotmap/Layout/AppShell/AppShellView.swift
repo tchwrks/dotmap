@@ -15,6 +15,13 @@ struct AppShellView: View {
             DotmapColor.windowChrome
                 .ignoresSafeArea()
 
+            SidebarToggleOverlayView(
+                isSidebarOpen: $isSidebarOpen,
+                sidebarWidth: sidebarWidth,
+                inset: contentInset
+            )
+            .zIndex(1)
+
             HStack(alignment: .top, spacing: isSidebarOpen ? AppShellChromeMetrics.interPaneSpacing : 0) {
                 if isSidebarOpen {
                     SidebarMenuView(selectedRoute: $selectedRoute)
@@ -31,12 +38,6 @@ struct AppShellView: View {
             }
             .padding(contentInset)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-
-            SidebarToggleOverlayView(
-                isSidebarOpen: $isSidebarOpen,
-                sidebarWidth: sidebarWidth,
-                inset: contentInset
-            )
         }
         .background(
             DotmapWindowConfigurator(

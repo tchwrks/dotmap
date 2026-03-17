@@ -9,6 +9,12 @@ if [[ ! -d "$ASSET_CATALOG" ]]; then
   exit 1
 fi
 
+sanitize_svg() {
+  local icon_file="$1"
+  # Normalize unresolved CSS var() values so Xcode template tint rendering works.
+  perl -0pi -e 's/var\(--[^),]+(?:,\s*([^)]+))?\)/defined $1 ? $1 : "currentColor"/ge' "$icon_file"
+}
+
 ICONS=(
   "icon-panelToggle|https://www.figma.com/api/mcp/asset/57cfb04f-36bd-4732-8697-a86939f12a26"
   "icon-close|https://www.figma.com/api/mcp/asset/dc052896-a55a-46f2-9337-819b545ba21f"
@@ -36,6 +42,7 @@ ICONS=(
   "icon-chevronRight|https://www.figma.com/api/mcp/asset/53d48581-4255-476b-b30b-ca309055c167"
   "icon-chevronDown|https://www.figma.com/api/mcp/asset/dddc2d25-47c0-4cf3-9c1b-923618a95afd"
   "icon-chevronUp|https://www.figma.com/api/mcp/asset/54e74763-9b55-4edd-b9cf-e3713b3635f7"
+  "icon-configCaret|https://www.figma.com/api/mcp/asset/cce477a1-186b-41fc-be17-75258b909ae1"
 )
 
 for item in "${ICONS[@]}"; do
@@ -47,6 +54,7 @@ for item in "${ICONS[@]}"; do
 
   mkdir -p "$imageset_dir"
   curl -L --fail --silent --show-error "$icon_url" -o "$icon_file"
+  sanitize_svg "$icon_file"
 
   cat > "$imageset_dir/Contents.json" <<JSON
 {
