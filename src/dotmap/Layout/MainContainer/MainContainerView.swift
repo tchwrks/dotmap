@@ -33,65 +33,19 @@ struct MainContainerView: View {
         case .home:
             HomeView()
         case .healthChecks:
-            placeholderScreen("Health Checks")
+            HealthChecksView()
         case .aliases:
-            placeholderScreen("Aliases")
+            AliasesView()
         case .variables:
-            placeholderScreen("Variables")
+            VariablesView()
         case .paths:
-            placeholderScreen("PATHs")
+            PathsView()
         case .functions:
-            placeholderScreen("Functions")
+            FunctionsView()
         case let .config(selection):
-            configPlaceholder(selection)
+            ConfigFileView(selection: selection)
         case .settings:
-            placeholderScreen("Settings")
+            SettingsView()
         }
-    }
-
-    private func placeholderScreen(_ title: String) -> some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: DotmapSpacing.sm) {
-                Text("\(title) page")
-                    .dotmapTextStyle(DotmapTypography.bodyStrong)
-                    .foregroundStyle(DotmapColor.textPrimary)
-                Text("Placeholder content")
-                    .dotmapTextStyle(DotmapTypography.body)
-                    .foregroundStyle(DotmapColor.textMuted)
-            }
-            .frame(maxWidth: 800, alignment: .topLeading)
-            .frame(maxWidth: .infinity, alignment: .top)
-            .padding(DotmapSpacing.lg)
-            .padding(.top, DotmapSpacing.sm)
-        }
-        .scrollIndicators(.never)
-    }
-
-    private func configPlaceholder(_ selection: ConfigSelection) -> some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: DotmapSpacing.sm) {
-                switch selection {
-                case let .rootFile(fileName):
-                    Text("\(fileName) config")
-                        .dotmapTextStyle(DotmapTypography.bodyStrong)
-                        .foregroundStyle(DotmapColor.textPrimary)
-                    Text("Config page placeholder content")
-                        .dotmapTextStyle(DotmapTypography.body)
-                        .foregroundStyle(DotmapColor.textMuted)
-                case let .sourcedBlock(parent, block):
-                    Text("\(parent): \(block)")
-                        .dotmapTextStyle(DotmapTypography.bodyStrong)
-                        .foregroundStyle(DotmapColor.textPrimary)
-                    Text("Sourced block placeholder content")
-                        .dotmapTextStyle(DotmapTypography.body)
-                        .foregroundStyle(DotmapColor.textMuted)
-                }
-            }
-            .frame(maxWidth: 800, alignment: .topLeading)
-            .frame(maxWidth: .infinity, alignment: .top)
-            .padding(DotmapSpacing.lg)
-            .padding(.top, DotmapSpacing.sm)
-        }
-        .scrollIndicators(.never)
     }
 }
