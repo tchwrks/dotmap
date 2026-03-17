@@ -16,6 +16,7 @@ struct ConfigFileTreeRow: View {
     let focusedRoute: FocusState<AppRoute?>.Binding
     @Binding var isKeyboardNavigationActive: Bool
 
+    let onSelect: () -> Void
     let onToggleExpand: () -> Void
 
     private var route: AppRoute {
@@ -30,7 +31,7 @@ struct ConfigFileTreeRow: View {
         return ZStack(alignment: .trailing) {
             Button {
                 isKeyboardNavigationActive = false
-                selectedRoute = route
+                onSelect()
             } label: {
                 HStack(spacing: DotmapSpacing.xs) {
                     DotmapIconView(
@@ -70,12 +71,12 @@ struct ConfigFileTreeRow: View {
             .focusEffectDisabled()
             .onKeyPress(.return) {
                 isKeyboardNavigationActive = true
-                selectedRoute = route
+                onSelect()
                 return .handled
             }
             .onKeyPress(.space) {
                 isKeyboardNavigationActive = true
-                selectedRoute = route
+                onSelect()
                 return .handled
             }
             .accessibilityLabel(Text(file.name))

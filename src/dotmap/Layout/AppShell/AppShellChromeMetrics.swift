@@ -18,6 +18,7 @@ enum AppShellChromeMetrics {
     static let toggleGapToTitle: CGFloat = DotmapSpacing.xxl
     static let openToggleTrailingInsetFromSidebar: CGFloat = DotmapSpacing.sm
     static let keyboardFocusRingLineWidth: CGFloat = 2
+    static let sidebarScrollFadeHeight: CGFloat = DotmapSpacing.xl
 
     static var topChromeCenterYFromTop: CGFloat {
         contentInset + (topChromeHeight / 2)
