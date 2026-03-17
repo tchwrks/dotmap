@@ -27,32 +27,41 @@ There is no Tauri, no Electron, no Rust, no React, no TypeScript, no web layer o
 ## Repo Structure
 
 ```
-Dotmap/
-├── App/                  # Entry point, top-level app state
-├── Parser/               # Shell config parsing — most critical code
-│   ├── ConfigParser.swift
-│   ├── ConfigEntry.swift  # The ConfigEntry enum
-│   ├── BlockDetector.swift
-│   └── SourceResolver.swift
-├── Watcher/              # FSEvents file watching
-├── Shell/                # Process spawning for live env evaluation
-├── Health/               # Health check analysis
-├── Models/               # Alias, EnvVar, PathEntry, ShellFunction, ConfigFile
-├── Views/
-│   ├── Home/
-│   ├── Environment/      # AliasesView, VariablesView, PathsView, FunctionsView
-│   ├── Config/           # ConfigView, BlockView, EditorView
-│   ├── Health/
-│   ├── Search/
-│   ├── Settings/
-│   └── Shared/           # Sidebar, DetailPanel, reusable components
-└── Storage/              # Local JSON persistence in Application Support
+dotmap/
+├── src/
+│   ├── dotmap.xcodeproj/
+│   └── dotmap/
+│       ├── dotmapApp.swift        # canonical app entry point
+│       ├── DesignSystem/
+│       │   ├── Tokens/
+│       │   ├── Fonts/
+│       │   └── Icons/
+│       ├── Core/                  # app-wide shared code
+│       │   ├── Models/
+│       │   ├── Parser/            # shared parser zone as parser modules land
+│       │   ├── Watcher/           # shared watcher zone as file watching lands
+│       │   └── Storage/           # shared storage zone as persistence lands
+│       ├── Features/
+│       │   ├── Home/
+│       │   ├── Environment/       # Aliases, Variables, PATHs, Functions routes
+│       │   ├── Configs/
+│       │   ├── HealthChecks/
+│       │   └── Settings/
+│       ├── Layout/
+│       │   ├── AppShell/
+│       │   ├── Sidebar/
+│       │   ├── MainContainer/
+│       │   └── BlurWindow/
+│       ├── Window/
+│       └── Assets.xcassets
 
 DotmapTests/
 ├── ParserTests.swift
 ├── HealthCheckerTests.swift
 └── Fixtures/             # Real-world .zshrc files for parser tests
 ```
+
+`FeatureController` files are optional and future-facing. Add them only when feature-level state or orchestration outgrows local SwiftUI state.
 
 ---
 

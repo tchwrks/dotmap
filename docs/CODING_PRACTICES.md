@@ -16,51 +16,37 @@ Dotmap is a single Xcode project. No monorepo tooling, no separate frontend/back
 
 ```
 dotmap/
-├── Dotmap.xcodeproj/
-├── Dotmap/
-│   ├── App/
-│   │   ├── DotmapApp.swift          # @main entry point
-│   │   └── AppState.swift           # Top-level observable state
-│   ├── Parser/
-│   │   ├── ConfigParser.swift       # Core parser — most critical file
-│   │   ├── ConfigEntry.swift        # ConfigEntry enum and associated types
-│   │   ├── BlockDetector.swift      # Tool-managed block detection
-│   │   └── SourceResolver.swift     # Resolves source directives recursively
-│   ├── Watcher/
-│   │   └── ConfigWatcher.swift      # FSEvents file watching
-│   ├── Shell/
-│   │   └── ShellEnvironment.swift   # Process spawning for live env evaluation
-│   ├── Health/
-│   │   └── HealthChecker.swift      # Health check analysis
-│   ├── Models/
-│   │   ├── Alias.swift
-│   │   ├── EnvVar.swift
-│   │   ├── PathEntry.swift
-│   │   ├── ShellFunction.swift
-│   │   └── ConfigFile.swift
-│   ├── Views/
-│   │   ├── Home/
-│   │   ├── Environment/
-│   │   │   ├── AliasesView.swift
-│   │   │   ├── VariablesView.swift
-│   │   │   ├── PathsView.swift
-│   │   │   └── FunctionsView.swift
-│   │   ├── Config/
-│   │   │   ├── ConfigView.swift
-│   │   │   ├── BlockView.swift
-│   │   │   └── EditorView.swift
-│   │   ├── Health/
-│   │   ├── Search/
-│   │   ├── Settings/
-│   │   └── Shared/
-│   │       ├── Sidebar.swift
-│   │       ├── DetailPanel.swift
-│   │       └── Components/
-│   ├── Storage/
-│   │   └── AppStorage.swift         # Local JSON persistence in Application Support
-│   └── Resources/
-│       └── Assets.xcassets
-├── DotmapTests/
+├── src/
+│   ├── dotmap.xcodeproj/
+│   └── dotmap/
+│       ├── dotmapApp.swift          # @main entry point
+│       ├── DesignSystem/
+│       │   ├── Tokens/
+│       │   ├── Fonts/
+│       │   └── Icons/
+│       ├── Core/                    # app-wide shared code
+│       │   ├── Models/
+│       │   ├── Parser/              # parser modules live here as they land
+│       │   ├── Watcher/             # file watching modules live here as they land
+│       │   └── Storage/             # persistence modules live here as they land
+│       ├── Features/
+│       │   ├── Home/
+│       │   ├── Environment/
+│       │   │   ├── Aliases/
+│       │   │   ├── Variables/
+│       │   │   ├── PATHs/
+│       │   │   └── Functions/
+│       │   ├── Configs/
+│       │   ├── HealthChecks/
+│       │   └── Settings/
+│       ├── Layout/
+│       │   ├── AppShell/
+│       │   ├── Sidebar/
+│       │   ├── MainContainer/
+│       │   └── BlurWindow/
+│       ├── Window/
+│       └── Assets.xcassets/
+├── DotmapTests/                      # parser + health tests and fixtures
 │   ├── ParserTests.swift
 │   ├── HealthCheckerTests.swift
 │   └── Fixtures/                    # Real-world .zshrc sample files for tests
@@ -69,8 +55,9 @@ dotmap/
 
 **Rules:**
 - One type per file. The file name matches the primary type it defines.
-- The `Parser/` group is the most critical and most tested code. Treat it like library code — pure functions, no side effects, comprehensive tests.
-- Views are organized by feature, not by type. `AliasesView` lives in `Views/Environment/`, not in a flat `Views/` dump.
+- Shared parser code belongs in `Core/Parser/` and remains the most critical, most tested code in the app.
+- Views are organized by feature in `Features/`, not by type or a flat view dump. `AliasesView` belongs under `Features/Environment/Aliases/`.
+- Feature controllers are optional and future-facing. Add `<Feature>Controller.swift` only when feature-level orchestration outgrows local view state.
 - No deeply nested group hierarchies. If a group has more than ~8 files, consider splitting into sub-groups. If it has fewer than 3, it probably doesn't need its own group.
 
 ---

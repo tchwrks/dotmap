@@ -15,7 +15,12 @@ struct dotmapApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppShellView()
+                .frame(
+                    minWidth: DotmapWindowConfigurator.defaultMinimumSize.width,
+                    minHeight: DotmapWindowConfigurator.defaultMinimumSize.height
+                )
         }
+        .windowStyle(.hiddenTitleBar)
     }
 }

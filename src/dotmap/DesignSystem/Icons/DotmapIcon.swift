@@ -2,7 +2,8 @@ import AppKit
 import SwiftUI
 
 enum DotmapIcon: String, CaseIterable {
-    case panelToggle
+    case panelLeftClose
+    case panelLeftOpen
     case close
     case search
     case command
@@ -14,6 +15,7 @@ enum DotmapIcon: String, CaseIterable {
     case paths
     case functions
     case configFile
+    case configCaret
     case settings
 
     case sectionHealthSummary
@@ -36,7 +38,8 @@ enum DotmapIcon: String, CaseIterable {
     // Asset-first approach; SF Symbols are a fallback while icon export is in progress.
     var fallbackSystemName: String {
         switch self {
-        case .panelToggle: "sidebar.left"
+        case .panelLeftClose: "sidebar.left"
+        case .panelLeftOpen: "sidebar.right"
         case .close: "xmark"
         case .search: "magnifyingglass"
         case .command: "command"
@@ -48,6 +51,7 @@ enum DotmapIcon: String, CaseIterable {
         case .paths: "link"
         case .functions: "curlybraces"
         case .configFile: "doc"
+        case .configCaret: "chevron.up"
         case .settings: "gearshape"
 
         case .sectionHealthSummary: "heart.text.square"
@@ -64,6 +68,15 @@ enum DotmapIcon: String, CaseIterable {
         case .chevronUp: "chevron.up"
         }
     }
+
+    var rendersAsTemplate: Bool {
+        switch self {
+        case .panelLeftClose, .panelLeftOpen:
+            false
+        default:
+            true
+        }
+    }
 }
 
 struct DotmapIconView: View {
@@ -74,17 +87,25 @@ struct DotmapIconView: View {
     var body: some View {
         Group {
             if NSImage(named: NSImage.Name(icon.assetName)) != nil {
-                Image(icon.assetName)
-                    .resizable()
-                    .renderingMode(.template)
-                    .scaledToFit()
+                if icon.rendersAsTemplate {
+                    Image(icon.assetName)
+                        .resizable()
+                        .renderingMode(.template)
+                        .scaledToFit()
+                        .foregroundStyle(tint)
+                } else {
+                    Image(icon.assetName)
+                        .resizable()
+                        .renderingMode(.original)
+                        .scaledToFit()
+                }
             } else {
                 Image(systemName: icon.fallbackSystemName)
                     .resizable()
                     .scaledToFit()
+                    .foregroundStyle(tint)
             }
         }
         .frame(width: size, height: size)
-        .foregroundStyle(tint)
     }
 }

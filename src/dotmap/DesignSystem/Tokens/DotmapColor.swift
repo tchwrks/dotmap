@@ -3,7 +3,7 @@ import SwiftUI
 
 enum DotmapColor {
     // App surfaces
-    static let windowChrome = Color(nsColor: .dotmapHex(0x1E1E1E, alpha: 0.89))
+    static let windowChrome = Color(nsColor: .dotmapHex(0x1E1E1E, alpha: 0.44))
     static let appBackground = Color(nsColor: .dotmapHex(0x181818))
     static let surfacePrimary = Color(nsColor: .dotmapHex(0x232323))
     static let surfaceSecondary = Color(nsColor: .dotmapHex(0x323232))
@@ -18,6 +18,7 @@ enum DotmapColor {
     static let borderStrong = Color(nsColor: .dotmapHex(0x444444))
     static let borderField = Color(nsColor: .dotmapHex(0x2B2A2A))
     static let borderFocus = Color(nsColor: .dotmapHex(0x504D4D))
+    static let keyboardFocusRing = Color.accentColor
 
     // Text
     static let textPrimary = Color(nsColor: .dotmapHex(0xD0D0D0))

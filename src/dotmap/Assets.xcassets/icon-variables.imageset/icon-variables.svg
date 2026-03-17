@@ -2,9 +2,9 @@
 <g id="Frame" clip-path="url(#clip0_0_25)">
 <g id="Vector">
 </g>
-<path id="Vector_2" d="M4.5 4.5L1.6875 12.9375H7.3125L4.5 4.5Z" stroke="var(--stroke-0, #AAAAAA)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_3" d="M10.9688 8.4375C12.6774 8.4375 14.0625 7.05238 14.0625 5.34375C14.0625 3.63512 12.6774 2.25 10.9688 2.25C9.26012 2.25 7.875 3.63512 7.875 5.34375C7.875 7.05238 9.26012 8.4375 10.9688 8.4375Z" stroke="var(--stroke-0, #AAAAAA)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_4" d="M15.75 10.6875H9.5625V14.625H15.75V10.6875Z" stroke="var(--stroke-0, #AAAAAA)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M4.5 4.5L1.6875 12.9375H7.3125L4.5 4.5Z" stroke="#AAAAAA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M10.9688 8.4375C12.6774 8.4375 14.0625 7.05238 14.0625 5.34375C14.0625 3.63512 12.6774 2.25 10.9688 2.25C9.26012 2.25 7.875 3.63512 7.875 5.34375C7.875 7.05238 9.26012 8.4375 10.9688 8.4375Z" stroke="#AAAAAA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M15.75 10.6875H9.5625V14.625H15.75V10.6875Z" stroke="#AAAAAA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <defs>
 <clipPath id="clip0_0_25">

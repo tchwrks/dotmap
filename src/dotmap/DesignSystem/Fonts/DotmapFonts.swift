@@ -21,7 +21,8 @@ enum DotmapFonts {
         guard !didRegister else { return }
         didRegister = true
 
-        // Support either /Fonts or /Resources/Fonts under target root.
+        // Support DesignSystem-local fonts plus legacy resource layouts.
+        registerFonts(in: Bundle.main.resourceURL?.appendingPathComponent("DesignSystem/Fonts", isDirectory: true))
         registerFonts(in: Bundle.main.resourceURL?.appendingPathComponent("Fonts", isDirectory: true))
         registerFonts(in: Bundle.main.resourceURL?.appendingPathComponent("Resources/Fonts", isDirectory: true))
     }
