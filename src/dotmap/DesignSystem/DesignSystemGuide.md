@@ -13,7 +13,7 @@ This folder contains primitive design tokens derived from the current Figma file
 
 ## Font setup (required)
 Drop font files into:
-- `src/dotmap/Fonts/`
+- `src/dotmap/DesignSystem/Fonts/`
 
 Expected families:
 - Geist (sans)

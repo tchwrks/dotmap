@@ -1,21 +1,11 @@
 import SwiftUI
 
-// TODO: Replace mocked content blocks with production data-backed content.
 struct MainChromeView: View {
-    private var leadingTopAccessoryWidth: CGFloat = 0
+    let title: String
+    let leadingTopAccessoryWidth: CGFloat
 
     var body: some View {
-        VStack(spacing: 0) {
-            topChrome
-            MainContainerView()
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .background(DotmapColor.appBackground)
-        .clipShape(RoundedRectangle(cornerRadius: DotmapRadius.xl, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: DotmapRadius.xl, style: .continuous)
-                .stroke(DotmapColor.borderDefault, lineWidth: 1)
-        )
+        topChrome
     }
 
     private var topChrome: some View {
@@ -23,7 +13,7 @@ struct MainChromeView: View {
             Color.clear
                 .frame(width: leadingTopAccessoryWidth, height: 1)
 
-            Text("Home")
+            Text(title)
                 .dotmapTextStyle(DotmapTypography.bodyStrong)
                 .foregroundStyle(DotmapColor.textInverse)
 
@@ -75,13 +65,5 @@ struct MainChromeView: View {
                 .fill(DotmapColor.borderDefault)
                 .frame(height: 1)
         }
-    }
-}
-
-extension MainChromeView {
-    func leadingTopAccessoryWidth(_ width: CGFloat) -> MainChromeView {
-        var copy = self
-        copy.leadingTopAccessoryWidth = width
-        return copy
     }
 }

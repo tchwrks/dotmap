@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AppShellView: View {
     @AppStorage("dotmap.chrome.sidebar.open") private var isSidebarOpen = true
+    @State private var selectedRoute: AppRoute = .home
 
     private let sidebarWidth = AppShellChromeMetrics.sidebarWidth
     private let contentInset = AppShellChromeMetrics.contentInset
@@ -16,14 +17,16 @@ struct AppShellView: View {
 
             HStack(alignment: .top, spacing: isSidebarOpen ? AppShellChromeMetrics.interPaneSpacing : 0) {
                 if isSidebarOpen {
-                    SidebarMenuView()
+                    SidebarMenuView(selectedRoute: $selectedRoute)
                         .frame(width: sidebarWidth, alignment: .topLeading)
                         .frame(maxHeight: .infinity, alignment: .topLeading)
                         .transition(.move(edge: .leading).combined(with: .opacity))
                 }
 
-                MainChromeView()
-                    .leadingTopAccessoryWidth(isSidebarOpen ? 0 : AppShellChromeMetrics.closedTopChromeLeadingAccessoryWidth)
+                MainContainerView(
+                    route: selectedRoute,
+                    leadingTopAccessoryWidth: isSidebarOpen ? 0 : AppShellChromeMetrics.closedTopChromeLeadingAccessoryWidth
+                )
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
             .padding(contentInset)

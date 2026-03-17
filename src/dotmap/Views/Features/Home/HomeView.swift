@@ -1,12 +1,12 @@
 //
-//  MainContainerView.swift
+//  HomeView.swift
 //  dotmap
 //
 //  Created by Noah Davis on 3/16/26.
 //
 import SwiftUI
 
-struct MainContainerView: View {
+struct HomeView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: DotmapSpacing.lg) {
@@ -20,9 +20,8 @@ struct MainContainerView: View {
             .padding(.top, DotmapSpacing.sm)
         }
         .scrollIndicators(.never)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    
+
     private func stubBlock(title: String) -> some View {
         VStack(alignment: .leading, spacing: DotmapSpacing.sm) {
             Text(title)
