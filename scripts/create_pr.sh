@@ -148,7 +148,7 @@ fi
 if [[ -n "$BODY_FILE" ]]; then
   [[ -f "$BODY_FILE" ]] || die "Body file not found: $BODY_FILE"
 else
-  TEMP_BODY_FILE="$(mktemp /tmp/dotmap_pr_body.XXXXXX.md)"
+  TEMP_BODY_FILE="$(mktemp /tmp/dotmap_pr_body.XXXXXX)"
   BODY_FILE="$TEMP_BODY_FILE"
   TEMPLATE_FILE="$REPO_ROOT/.github/pull_request_template.md"
 
